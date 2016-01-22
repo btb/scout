@@ -1,5 +1,6 @@
 {% extends is_hybrid|yesno:"hybridize/base.html,scout/app.html" %}
 {% load staticfiles %}
+<script async="async" src="{% static "scout/js/filter.js" %}"></script>
 
 {% block title %}Filter{% endblock %}
 
@@ -18,11 +19,11 @@
 {% block hybrid_content %}
 
 <div class="content-block-title">Campus</div>
-<div class="list-block">
+<div id="campus_select" class="list-block">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="seattle" value="seattle" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Seattle</div>
@@ -31,7 +32,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="bothell" value="bothell">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Bothell</div>
@@ -40,7 +41,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="tacoma" value="tacoma">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Tacoma</div>
@@ -49,7 +50,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="south_lake_union" value="south_lake_union">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">South Lake Union</div>
@@ -60,11 +61,11 @@
 </div>
 
 <div class="content-block-title">Hours / Open for:</div>
-<div class="list-block">
+<div class="list-block" id="period_select">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="breakfast" value="breakfast" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Breakfast</div>
@@ -73,7 +74,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="lunch" value="lunch">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Lunch</div>
@@ -82,7 +83,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="dinner" value="dinner">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Dinner</div>
@@ -91,7 +92,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="late_night" value="late_night">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Late Night</div>
@@ -102,11 +103,11 @@
 </div>
 
 <div class="content-block-title">Payment accepted:</div>
-<div class="list-block">
+<div class="list-block" id="payment_select">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="s_pay_cash" value="s_pay_cash" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Cash</div>
@@ -115,7 +116,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_pay_husky" value="s_pay_husky">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Husky Card</div>
@@ -124,7 +125,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_pay_dining" value="s_pay_dining">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Dining Card</div>
@@ -133,7 +134,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_pay_visa" value="s_pay_visa">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Visa</div>
@@ -142,7 +143,7 @@
 		</li>
         <li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_pay_mastercard" value="s_pay_mastercard">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Mastercard</div>
@@ -153,11 +154,11 @@
 </div>
 
 <div class="content-block-title">Restaurant type</div>
-<div class="list-block">
+<div class="list-block" id="type_select">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="cafe" value="cafe" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Cafes</div>
@@ -166,16 +167,7 @@
 		</li>
         <li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
-				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-				<div class="item-inner">
-					<div class="item-title">Restaurant</div>
-				</div>
-			</label>
-		</li>
-        <li>
-			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="fine_dining" value="fine_dining">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Fine Dining</div>
@@ -184,7 +176,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="food_court" value="food_court">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Food Court</div>
@@ -193,7 +185,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="food_truck" value="food_truck">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Food Truck</div>
@@ -202,7 +194,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="market" value="market">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Market</div>
@@ -213,11 +205,11 @@
 </div>
 
 <div class="content-block-title">Food served</div>
-<div class="list-block">
+<div class="list-block" id="food_select">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="s_food_pizza" value="s_food_pizza" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Pizza</div>
@@ -226,7 +218,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_food_burgers" value="s_food_burgers">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Burgers</div>
@@ -235,7 +227,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_food_salads" value="s_food_salads">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Salads</div>
@@ -244,7 +236,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_food_espresso" value="s_food_espresso">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Coffee/Espresso</div>
@@ -253,10 +245,64 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_food_sandwiches" value="s_food_sandwiches">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Sandwiches</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_appetizers" value="s_food_appetizers">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Appetizers</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_entrees" value="s_food_entrees">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Entrees</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_pasta" value="s_food_pasta">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Pasta</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_smoothies" value="s_food_smoothies">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Smoothies</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_sushi" value="s_food_sushi">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Sushi</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_food_tacos" value="s_food_tacos">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Tacos</div>
 				</div>
 			</label>
 		</li>
@@ -264,11 +310,11 @@
 </div>
 
 <div class="content-block-title">Cuisine</div>
-<div class="list-block">
+<div class="list-block" id="cuisine_select">
 	<ul>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx" checked="checked">
+				<input type="checkbox" name="s_cuisine_american" value="s_cuisine_american" checked="checked">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">American</div>
@@ -277,7 +323,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_cuisine_bbq" value="s_cuisine_bbq">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">BBQ</div>
@@ -286,7 +332,7 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_cuisine_chinese" value="s_cuisine_chinese">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
 					<div class="item-title">Chinese</div>
@@ -295,19 +341,64 @@
 		</li>
 		<li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_cuisine_indian" value="s_cuisine_indian">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
-					<div class="item-title">Hawaiian</div>
+					<div class="item-title">Indian</div>
 				</div>
 			</label>
 		</li>
-		<li>
+        <li>
 			<label class="label-checkbox item-content">
-				<input type="checkbox" name="xx" value="xx">
+				<input type="checkbox" name="s_cuisine_italian" value="s_cuisine_italian">
 				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
 				<div class="item-inner">
-					<div class="item-title">Itallian</div>
+					<div class="item-title">Italian</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_cuisine_japanese" value="s_cuisine_japanese">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Japanese</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_cuisine_korean" value="s_cuisine_korean">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Korean</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_cuisine_mexican" value="s_cuisine_mexican">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Mexican</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_cuisine_vietnamese" value="s_cuisine_vietnamese">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Vietnamese</div>
+				</div>
+			</label>
+		</li>
+        <li>
+			<label class="label-checkbox item-content">
+				<input type="checkbox" name="s_cuisine_light_lunch" value="s_cuisine_light_lunch">
+				<div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+				<div class="item-inner">
+					<div class="item-title">Light Lunch</div>
 				</div>
 			</label>
 		</li>

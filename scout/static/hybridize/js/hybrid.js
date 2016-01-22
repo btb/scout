@@ -30,7 +30,11 @@ document.addEventListener('WebViewJavascriptBridgeReady', function(event) {
 // jquery ready
 	
 $( document ).ready(function() {
-	
+	// Include filter js if on filter page
+	if(window.location.href.indexOf("/filter/") > -1){
+		$.getScript('/static/scout/js/filter.js');
+	}
+
 	// handle resetting the filters
 	$('#reset_filter').click(function() {
 					
