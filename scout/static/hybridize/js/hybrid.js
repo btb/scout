@@ -43,3 +43,11 @@ $( document ).ready(function() {
 	});
 
 });
+
+function run_filter() {
+		var url = Filter.get_filter_url();
+		console.log('run filter');
+		console.log(url);
+		window.QueryUrl = url;
+		Android.showFilterResults(url);
+};
