@@ -1,3 +1,4 @@
 sauceclient
 selenium
 pyvirtualdisplay
+python-wd-parallel
