@@ -36,6 +36,14 @@ class SauceParallel(unittest.TestCase):
         browser['build'] = "story/food"
         desired_capabilities += [browser]
 
+        browser = copy.copy(webdriver.DesiredCapabilities.IPHONE)
+        browser['platform'] = 'OS X 10.10'
+        browser['name'] = 'iPhone 6'
+        browser['version'] = '9.2'
+        #browser['tags'] = "Parallel"
+        browser['build'] = "story/food"
+        desired_capabilities += [browser]
+        
         browser = copy.copy(webdriver.DesiredCapabilities.CHROME)
         browser['platform'] = 'OS X 10.11'
         browser['name'] = 'chrome'
