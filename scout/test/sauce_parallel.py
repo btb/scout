@@ -27,18 +27,36 @@ class SauceParallel(unittest.TestCase):
         # self.wd.implicitly_wait(60)
 
         desired_capabilities = []
-            
-        browser = copy.copy(webdriver.DesiredCapabilities.CHROME)
-        browser['platform'] = 'Mac OS X 10.9'
-        browser['name'] = 'Chrome'
-        browser['tags'] = "Parallel"
+
+        browser = copy.copy(webdriver.DesiredCapabilities.SAFARI)
+        browser['platform'] = 'OS X 10.11'
+        browser['name'] = 'safari'
+        browser['version'] = '9.0'
+        #browser['tags'] = "Parallel"
         browser['build'] = "story/food"
         desired_capabilities += [browser]
 
         browser = copy.copy(webdriver.DesiredCapabilities.CHROME)
+        browser['platform'] = 'OS X 10.11'
+        browser['name'] = 'chrome'
+        browser['version'] = '48.0'
+        #browser['tags'] = "Parallel"
+        browser['build'] = "story/food"
+        desired_capabilities += [browser]
+
+        browser = copy.copy(webdriver.DesiredCapabilities.FIREFOX)
         browser['platform'] = 'Windows 10'
-        browser['name'] = 'Chrome'
-        browser['tags'] = "Parallel"
+        browser['name'] = 'firefox'
+        browser['version'] = '44.0'
+        #browser['tags'] = "Parallel"
+        browser['build'] = "story/food"
+        desired_capabilities += [browser]
+
+        browser = copy.copy(webdriver.DesiredCapabilities.EDGE)
+        browser['platform'] = 'Windows 10'
+        browser['name'] = 'MicrosoftEdge'
+        browser['version'] = '13.10586'
+        #browser['tags'] = "Parallel"
         browser['build'] = "story/food"
         desired_capabilities += [browser]
 
