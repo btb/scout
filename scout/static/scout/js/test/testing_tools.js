@@ -16,16 +16,17 @@ fakeSessionStorage.prototype.getItem = function(item) {
     } else {
         return result;
     }
-}
+};
 
 fakeSessionStorage.prototype.setItem = function(item, value) {
     this.sessionVars[item] = value;
-}
+};
 
 fakeSessionStorage.prototype.removeItem = function(item) {
     // is this the best way to delte 
     delete this.sessionVars[item];
-}
+};
+
 var jqueryFromHtml = function jqueryFromHtml(html) {
     var doc = jsdom.jsdom(html);
     var win = doc.parentWindow;
@@ -42,10 +43,9 @@ var fakeWindow = function fakeWindow(initHref) {
     }
     this.location.replace = function(new_loc) {
         this.href = new_loc;
-    }
+    };
 
 };
-
 
 
 exports.fakeSessionStorage = fakeSessionStorage;
