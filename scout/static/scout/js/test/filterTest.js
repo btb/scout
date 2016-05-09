@@ -302,7 +302,6 @@ describe("Filter Tests", function() {
     });
 
     describe("Get Filter Label Text", function() {
-        var sessionVars;
         it('should return the right text with a URL with three different categories', function() {
             global.window = new fakeWindow(
                 "/food/?payment0=s_pay_visa" + 
