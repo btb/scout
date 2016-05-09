@@ -47,7 +47,6 @@ var default_selections = {
     ],
 };
 
-
 var generateSection = function generateSection(label, data){
     var result = '<div id="';
     result += label + '"> ';
@@ -98,7 +97,9 @@ describe("Filter Tests", function() {
             assert.equal(($(filter_item3[0]).prop("checked")), false );  
         });
         it('should check off two checkboxes based on the filter_params', function() {
-            var sessVars = new fakeSess({filter_params: '{"payment0":"s_pay_cash", "payment1":"s_pay_dining"}'});
+            var sessVars = new fakeSess(
+                {filter_params: '{"payment0":"s_pay_cash", "payment1":"s_pay_dining"}'}
+            );
             global.sessionStorage = sessVars;
             filter.Filter.init();
             filter_item = $("#food_select").find("input[value='s_food_smoothies']");
@@ -110,7 +111,9 @@ describe("Filter Tests", function() {
         });
         it('should be able to check off checkboxes in different sections', function() {
             global.$ = getDefaultJquery(filter_selections1);
-            var sessVars = new fakeSess({filter_params: '{"payment0":"s_pay_cash", "food0":"s_food_smoothies"}'});
+            var sessVars = new fakeSess({
+                filter_params: '{"payment0":"s_pay_cash", "food0":"s_food_smoothies"}'
+            });
             global.sessionStorage = sessVars;
             filter.Filter.init();
             filter_item = $("#food_select").find("input[value='s_food_smoothies']");
@@ -184,7 +187,9 @@ describe("Filter Tests", function() {
             assert.equal(value, undefined);
         });
         it('returns the correct URL for one filter', function() {
-            var sessionVars = new fakeSess({ filter_params: '{"payment0":"s_pay_cash"}'});
+            var sessionVars = new fakeSess(
+                { filter_params: '{"payment0":"s_pay_cash"}'}
+            );
             global.sessionStorage = sessionVars;
             value = filter.Filter.get_filter_url();
             assert.equal(value, 'payment0=s_pay_cash');
@@ -228,7 +233,7 @@ describe("Filter Tests", function() {
 
     describe("Replace Food Href", function() {
         beforeEach(function() {
-            global.$ = tools.jqueryFromHtml(' <a href="" id="link_food">Places</a>');
+            global.$ = tools.jqueryFromHtml('<a href="" id="link_food">Places</a>');
         });
         it('the link_food is replaced with the href of no filters', function() {
             var sessionVars = new fakeSess();
@@ -240,7 +245,9 @@ describe("Filter Tests", function() {
             assert.deepEqual(value, exp);
         });
         it('the link_food is replaced with the expected href of one filter', function() {
-            var sessionVars = new fakeSess({ filter_params: '{"payment0": "s_pay_cash"}'});
+            var sessionVars = new fakeSess(
+                { filter_params: '{"payment0": "s_pay_cash"}'}
+            );
             global.sessionStorage = sessionVars; 
             filter.Filter.replace_food_href();
             var food_anchor = $("#link_food");
@@ -268,7 +275,9 @@ describe("Filter Tests", function() {
         var sessionVars;
         before(function() {
             global.$ = getDefaultJquery(filter_selections2);
-            sessionVars = new fakeSess({ filter_params: '{"payment0": "s_pay_cash"}'});
+            sessionVars = new fakeSess(
+                { filter_params: '{"payment0": "s_pay_cash"}'}
+            );
             global.sessionStorage = sessionVars;
             global.window = new fakeWindow("");
             filter.Filter.reset_filter(); 
@@ -291,22 +300,33 @@ describe("Filter Tests", function() {
 
         });
     });
+
     describe("Get Filter Label Text", function() {
         var sessionVars;
         it('should return the right text with a URL with three different categories', function() {
-            global.window = new fakeWindow("/food/?payment0=s_pay_visa&type0=food_truck&open_now=true");
+            global.window = new fakeWindow(
+                "/food/?payment0=s_pay_visa" + 
+                "&type0=food_truck&open_now=true"
+            );
             var result = filter.Filter._get_filter_label_text();
             var exp = "Payment Accepted, Restaurant Type, Open Now";
             assert.equal(result, exp);
         });
         it('should return the right text with a URL containing filters from same category', function() {
-            global.window = new fakeWindow("/food/?period0=breakfast&period1=lunch&period2=dinner");
+            global.window = new fakeWindow(
+                "/food/?period0=breakfast" + 
+                "&period1=lunch&period2=dinner"
+            );
             var result = filter.Filter._get_filter_label_text();
             var exp = "Open Period";
             assert.equal(result, exp);
         });
         it('should return the right text with a URL containing multiple filters from same/different categories', function() {
-            global.window = new fakeWindow("/food/?campus0=tacoma&period0=breakfast&period1=lunch&period2=dinner&open_now=true");
+            global.window = new fakeWindow(
+                "/food/?campus0=tacoma"
+                + "&period0=breakfast&period1=lunch"
+                + "&period2=dinner&open_now=true"
+            );
             var result = filter.Filter._get_filter_label_text();
             var exp = "Campus, Open Period, Open Now";
             assert.equal(result, exp);
@@ -318,9 +338,13 @@ describe("Filter Tests", function() {
             assert.equal(result, exp);
         });
     });
+
     describe("Set Filter Text", function() {
         beforeEach(function() {
-            global.$ = tools.jqueryFromHtml('<div class="scout-filter-results-text" id="filter_label_text">--</div>');
+            global.$ = tools.jqueryFromHtml(
+                '<div class="scout-filter-results-text"' + 
+                ' id="filter_label_text">--</div>'
+            );
         });
         it('should not change the filter text, if the URL is empty', function() {
             global.window = new fakeWindow("");
@@ -333,9 +357,15 @@ describe("Filter Tests", function() {
             assert.equal($("#filter_label_text").html(), "Campus");
         });
     });
+
     describe("Init Events", function() {
         before(function() {
-            global.$ = tools.jqueryFromHtml('<input id="reset_button" type="button" value="Reset"> <input id="run_search" type="button" value="View Results"> <a id="reset_filter"> <input id="noevents">');
+            global.$ = tools.jqueryFromHtml(
+                '<input id="reset_button" type="button"' + 
+                ' value="Reset"> <input id="run_search"' + 
+                ' type="button" value="View Results"> ' + 
+                '<a id="reset_filter"> <input id="noevents">'
+            );
             filter.Filter.init_events();
         });
         it('should attach an event to run_search', function() {
@@ -358,7 +388,6 @@ describe("Filter Tests", function() {
             var events = $._data($(elem).get(0), "events");
             assert.equal(events, undefined);
         });
-
     });
 });
 
