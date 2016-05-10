@@ -99,6 +99,7 @@ describe("Filter Tests", function() {
              var sessVars = new fakeSess();
             global.sessionStorage = sessVars;
             filter.Filter.init();
+            // Check to see if the filter checkboxes are still unchecked
             filter_item = $("#food_select").find("input[value='s_food_smoothies']");
             filter_item2 = $("#payment_select").find("input[value='s_pay_cash']");
             filter_item3 = $("#payment_select").find("input[value='s_pay_dining']");
@@ -112,6 +113,7 @@ describe("Filter Tests", function() {
             );
             global.sessionStorage = sessVars;
             filter.Filter.init();
+            // Check to see if the intended filters are checked off
             filter_item = $("#food_select").find("input[value='s_food_smoothies']");
             filter_item2 = $("#payment_select").find("input[value='s_pay_cash']");
             filter_item3 = $("#payment_select").find("input[value='s_pay_dining']");
@@ -126,6 +128,7 @@ describe("Filter Tests", function() {
             });
             global.sessionStorage = sessVars;
             filter.Filter.init();
+            // Check to see if the intended filters are checked off
             filter_item = $("#food_select").find("input[value='s_food_smoothies']");
             filter_item2 = $("#payment_select").find("input[value='s_pay_cash']");
             filter_item3 = $("#payment_select").find("input[value='s_pay_dining']");
@@ -176,6 +179,7 @@ describe("Filter Tests", function() {
             global.sessionStorage = sessionVars;
             filter.Filter.set_filter_params();
             var exp = {type0 : 'cafe', type1 : 'cafeteria', food0: "s_food_frozen_yogurt"};
+            // Check to see if the right filter params are generated
             assert.deepEqual(JSON.parse(sessionVars.getItem("filter_params")), exp);
         });
         it('returns the right params after page is init with previous filters', function() {
@@ -185,6 +189,7 @@ describe("Filter Tests", function() {
             filter.Filter.init();
             filter.Filter.set_filter_params();
             var exp = {payment0 : 's_pay_cash'};
+            // Check to see if the right filter params are generated
             assert.deepEqual(JSON.parse(sessionVars.getItem("filter_params")), exp);
         });
     });
@@ -215,6 +220,7 @@ describe("Filter Tests", function() {
             });
             global.sessionStorage = sessionVars;
             var filter_url = filter.Filter.get_filter_url();
+            // Take the generated url and split it up in alpha order
             var filter_url_parts = filter_url.split('&');
             filter_url_parts.sort();
             var expected = [
@@ -225,6 +231,7 @@ describe("Filter Tests", function() {
                 'type1=market',
             ];
             expected.sort();
+            // Check to see if the components are equal
             assert.deepEqual(expected, filter_url_parts);
         });
         it('returns the URL in the right order for a filter', function() {
@@ -306,8 +313,8 @@ describe("Filter Tests", function() {
             assert.equal(($(filter_item3[0]).prop("checked")), false);
         });
         it('should change the window location', function() {
+            // Testing that the window's href has changed
             assert.equal(global.window.location.href, '/food/');
-
         });
     });
 
@@ -377,6 +384,8 @@ describe("Filter Tests", function() {
             );
             filter.Filter.init_events();
         });
+        // These methods check to see if the css selectors 
+        // have/don't have events attached to them
         it('should attach an event to run_search', function() {
             var elem = "#run_search";
             var events = $._data($(elem).get(0), "events");
