@@ -89,7 +89,9 @@ var getDefaultJquery = function(filters) {
     return tools.jqueryFromHtml(generateHtml(filters));
 };
 
-// Test Methods
+// Test Methods for filter.js, each section of tests
+// test a specific method and the potential cases that the
+// method may face
 describe("Filter Tests", function() {
     describe("Initialization", function() {
         beforeEach(function() {
