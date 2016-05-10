@@ -6,6 +6,10 @@ var tools = require('./testing_tools');
 var fakeSess = require('./testing_tools').fakeSessionStorage;
 var fakeWindow = require('./testing_tools').fakeWindow;
 
+/*
+These following associative arrays store info that is used to 
+generate the mock html that the test methods test
+*/
 var filter_selections = {
     type_select: [
         { value: "cafe", checked: true, text: "Cafes"},
@@ -47,9 +51,11 @@ var default_selections = {
     ],
 };
 
-var generateSection = function generateSection(label, data){
+// Generates a html div element with given id, creates the 
+// filters (labels with checkboxes) modeled by the given data
+var generateSection = function generateSection(id, data){
     var result = '<div id="';
-    result += label + '"> ';
+    result += id + '"> ';
     for (i = 0; i < data.length; i++) {
         result += "<label>";
         result += '<input type="checkbox" value="';
@@ -65,6 +71,8 @@ var generateSection = function generateSection(label, data){
     return result; 
 };
 
+// Given the filterData, creates html div elements of each
+// filter "section" with its given filters (labels with checkboxes)
 var generateHtml = function generateHtml(filterData) {
     var out = '';
     for (var section in filterData) {
@@ -73,6 +81,7 @@ var generateHtml = function generateHtml(filterData) {
     return out;
 };
 
+// Given the filterData, returns the appropriate jQuery
 var getDefaultJquery = function(filters) {
     if (filters === undefined) {
         filters = default_selections;
@@ -80,6 +89,7 @@ var getDefaultJquery = function(filters) {
     return tools.jqueryFromHtml(generateHtml(filters));
 };
 
+// Test Methods
 describe("Filter Tests", function() {
     describe("Initialization", function() {
         beforeEach(function() {

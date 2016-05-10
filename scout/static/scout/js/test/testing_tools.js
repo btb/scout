@@ -1,6 +1,7 @@
 var jsdom = require('jsdom');
 var jquery = require('jquery');
 
+// Used to test the variables stored during the session
 var fakeSessionStorage = function fakeSessionStorage(initval){
     if (initval !== undefined) {
         this.sessionVars = initval;
@@ -23,10 +24,10 @@ fakeSessionStorage.prototype.setItem = function(item, value) {
 };
 
 fakeSessionStorage.prototype.removeItem = function(item) {
-    // is this the best way to delte 
     delete this.sessionVars[item];
 };
 
+// Used in many tests to generate jquery from given html
 var jqueryFromHtml = function jqueryFromHtml(html) {
     var doc = jsdom.jsdom(html);
     var win = doc.parentWindow;
@@ -34,6 +35,7 @@ var jqueryFromHtml = function jqueryFromHtml(html) {
     return $;
 };
 
+// Used to test the href of the current window/browser
 var fakeWindow = function fakeWindow(initHref) {
     this.location = {};
     if (initHref !== undefined) {
@@ -44,9 +46,7 @@ var fakeWindow = function fakeWindow(initHref) {
     this.location.replace = function(new_loc) {
         this.href = new_loc;
     };
-
 };
-
 
 exports.fakeSessionStorage = fakeSessionStorage;
 exports.jqueryFromHtml = jqueryFromHtml;
