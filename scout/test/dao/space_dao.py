@@ -34,19 +34,19 @@ class SpaceDAOTest(TestCase):
     def test_add_foodtypes(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(1)
-        spot = add_foodtype_names_to_spot(spot)
+        add_foodtype_names_to_spot(spot)
         self.assertEqual(spot.foodtype_names, ["Entrees", "Sandwiches"])
 
     def test_add_cuisine(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(1)
-        spot = add_cuisine_names(spot)
+        add_cuisine_names(spot)
         self.assertEqual(spot.cuisinetype_names, ["Indian", "Vietnamese"])
 
     def test_add_payment(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(1)
-        spot = add_payment_names(spot)
+        add_payment_names(spot)
         self.assertEqual(spot.payment_names, ["Cash", "Husky Card",
                                               "Mastercard", "Dining Account",
                                               "Visa"])
@@ -54,7 +54,7 @@ class SpaceDAOTest(TestCase):
     def test_add_additional_info(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(1)
-        spot = add_additional_info(spot)
+        add_additional_info(spot)
         self.assertEqual(spot.has_alert, None)
         self.assertEqual(spot.alert_notes, None)
         self.assertEqual(spot.has_reservation, None)
@@ -77,7 +77,7 @@ class SpaceDAOTest(TestCase):
         local_tz = pytz.timezone('America/Los_Angeles')
         sc = Spotseeker()
         spot = sc.get_spot_by_id(4)
-        spot = organize_hours(spot)
+        organize_hours(spot)
 
         # monday
         current_time = local_tz.localize(datetime.datetime(
@@ -124,7 +124,7 @@ class SpaceDAOTest(TestCase):
     def test_open_periods(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(1)
-        spot = organize_hours(spot)
+        organize_hours(spot)
 
         self.assertOpenPeriods(
             spot,
@@ -148,7 +148,7 @@ class SpaceDAOTest(TestCase):
 
         # Test spot open across midnight
         spot = sc.get_spot_by_id(4)
-        spot = organize_hours(spot)
+        organize_hours(spot)
         self.assertOpenPeriods(
             spot,
             (2015, 12, 25, 0, 0, 0),
@@ -156,7 +156,7 @@ class SpaceDAOTest(TestCase):
 
         # Test spots that exactly fill period hours
         spot = sc.get_spot_by_id(5)
-        spot = organize_hours(spot)
+        organize_hours(spot)
         # Monday
         self.assertOpenPeriods(spot, (2016, 4, 18, 0, 0, 0), ('late_night',))
         # Tuesday
@@ -191,6 +191,6 @@ class SpaceDAOTest(TestCase):
     def test_organize_hours(self):
         sc = Spotseeker()
         spot = sc.get_spot_by_id(4)
-        spot_hours = organize_hours(spot)
+        organize_hours(spot)
 
-        self.assertEqual(len(spot_hours.hours), 7)
+        self.assertEqual(len(spot.hours), 7)

@@ -27,6 +27,59 @@ OPEN_PERIODS = {
         },
     }
 
+FOOD_TYPE_PREFIX = "s_food_"
+
+FOOD_TYPE_MAPPING = {
+    "s_food_burgers": "Burgers",
+    "s_food_breakfast": "Breakfast",
+    "s_food_curry": "Curry",
+    "s_food_desserts": "Desserts",
+    "s_food_entrees": "Entrees",
+    "s_food_espresso": "Espresso",
+    "s_food_frozen_yogurt": "Frozen Yogurt",
+    "s_food_pasta": "Pasta",
+    "s_food_pastries": "Pastries",
+    "s_food_pho": "Pho",
+    "s_food_pizza": "Pizza",
+    "s_food_salads": "Salads",
+    "s_food_sandwiches": "Sandwiches",
+    "s_food_smoothies": "Smoothies",
+    "s_food_sushi_packaged": "Sushi (packaged)",
+    "s_food_tacos": "Tacos",
+}
+
+CUISINE_TYPE_PREFIX = "s_cuisine"
+
+CUISINE_TYPE_MAPPING = {
+    "s_cuisine_american": "American",
+    "s_cuisine_bbq": "BBQ",
+    "s_cuisine_chinese": "Chinese",
+    "s_cuisine_hawaiian": "Hawaiian",
+    "s_cuisine_indian": "Indian",
+    "s_cuisine_italian": "Italian",
+    "s_cuisine_korean": "Korean",
+    "s_cuisine_mexican": "Mexican",
+    "s_cuisine_vietnamese": "Vietnamese",
+}
+
+PAYMENT_PREFIX = "s_pay"
+
+PAYMENT_MAPPING = {
+    "s_pay_cash": "Cash",
+    "s_pay_visa": "Visa",
+    "s_pay_mastercard": "Mastercard",
+    "s_pay_husky": "Husky Card",
+    "s_pay_dining": "Dining Account",
+}
+
+days_list = ['monday',
+             'tuesday',
+             'wednesday',
+             'thursday',
+             'friday',
+             'saturday',
+             'sunday']
+
 
 def get_spot_list():
     spot_client = Spotseeker()
@@ -34,7 +87,7 @@ def get_spot_list():
         res = spot_client.search_spots([('limit', 0),
                                         ('extended_info:app_type', 'food')])
         for spot in res:
-            spot = process_extended_info(spot)
+            process_extended_info(spot)
     except DataFailureException:
         # TODO: consider logging on failure
         res = []
@@ -48,7 +101,7 @@ def get_spots_by_filter(filters=[]):
     try:
         res = spot_client.search_spots(filters)
         for spot in res:
-            spot = process_extended_info(spot)
+            process_extended_info(spot)
     except DataFailureException:
         # TODO: consider logging on failure
         res = []
@@ -108,11 +161,11 @@ def get_spot_by_id(spot_id):
 
 
 def process_extended_info(spot):
-    spot = add_foodtype_names_to_spot(spot)
-    spot = add_cuisine_names(spot)
-    spot = add_payment_names(spot)
-    spot = add_additional_info(spot)
-    spot = organize_hours(spot)
+    add_foodtype_names_to_spot(spot)
+    add_cuisine_names(spot)
+    add_payment_names(spot)
+    add_additional_info(spot)
+    organize_hours(spot)
 
     now = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
     spot.is_open = get_is_spot_open(spot, now)
@@ -130,14 +183,6 @@ def organize_hours(spot):
         'saturday': [],
         'sunday': [],
     }
-
-    days_list = ['monday',
-                 'tuesday',
-                 'wednesday',
-                 'thursday',
-                 'friday',
-                 'saturday',
-                 'sunday']
 
     for day in days_list:
         overnight = False
@@ -170,7 +215,6 @@ def organize_hours(spot):
                                             close))
         overnight = False
     spot.hours = hours_object
-    return spot
 
 
 def get_open_periods_by_day(spot, now):
@@ -263,7 +307,6 @@ def add_additional_info(spot):
     spot.campus = _get_extended_info_by_key("campus", spot.extended_info)
 
     spot.app_type = _get_extended_info_by_key("app_type", spot.extended_info)
-    return spot
 
 
 def _get_extended_info_by_key(key, extended_info):
@@ -284,60 +327,18 @@ def _get_names_for_extended_info(prefix, mapping, info):
 
 
 def add_payment_names(spot):
-    PAYMENT_PREFIX = "s_pay"
-    PAYMENT_MAPPING = {
-        "s_pay_cash": "Cash",
-        "s_pay_visa": "Visa",
-        "s_pay_mastercard": "Mastercard",
-        "s_pay_husky": "Husky Card",
-        "s_pay_dining": "Dining Account",
-    }
     spot.payment_names = _get_names_for_extended_info(PAYMENT_PREFIX,
                                                       PAYMENT_MAPPING,
                                                       spot.extended_info)
-    return spot
 
 
 def add_cuisine_names(spot):
-    CUISINE_TYPE_PREFIX = "s_cuisine"
-    CUISINE_TYPE_MAPPING = {
-        "s_cuisine_american": "American",
-        "s_cuisine_bbq": "BBQ",
-        "s_cuisine_chinese": "Chinese",
-        "s_cuisine_hawaiian": "Hawaiian",
-        "s_cuisine_indian": "Indian",
-        "s_cuisine_italian": "Italian",
-        "s_cuisine_korean": "Korean",
-        "s_cuisine_mexican": "Mexican",
-        "s_cuisine_vietnamese": "Vietnamese",
-    }
     spot.cuisinetype_names = _get_names_for_extended_info(CUISINE_TYPE_PREFIX,
                                                           CUISINE_TYPE_MAPPING,
                                                           spot.extended_info)
-    return spot
 
 
 def add_foodtype_names_to_spot(spot):
-    FOOD_TYPE_PREFIX = "s_food_"
-    FOOD_TYPE_MAPPING = {
-        "s_food_burgers": "Burgers",
-        "s_food_breakfast": "Breakfast",
-        "s_food_curry": "Curry",
-        "s_food_desserts": "Desserts",
-        "s_food_entrees": "Entrees",
-        "s_food_espresso": "Espresso",
-        "s_food_frozen_yogurt": "Frozen Yogurt",
-        "s_food_pasta": "Pasta",
-        "s_food_pastries": "Pastries",
-        "s_food_pho": "Pho",
-        "s_food_pizza": "Pizza",
-        "s_food_salads": "Salads",
-        "s_food_sandwiches": "Sandwiches",
-        "s_food_smoothies": "Smoothies",
-        "s_food_sushi_packaged": "Sushi (packaged)",
-        "s_food_tacos": "Tacos",
-    }
     spot.foodtype_names = _get_names_for_extended_info(FOOD_TYPE_PREFIX,
                                                        FOOD_TYPE_MAPPING,
                                                        spot.extended_info)
-    return spot
