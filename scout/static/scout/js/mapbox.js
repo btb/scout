@@ -11,6 +11,7 @@ var Map = {
                 Map.initializeDetailMap();
             }
         });
+
         // handle map stuff for window resize
         $(window).resize(function() {
             // list map
@@ -22,6 +23,7 @@ var Map = {
                 Map.initializeDetailMap();
             }
         });
+
     },
 
     init_map_page: function () {
@@ -32,6 +34,7 @@ var Map = {
 
         var mapExists = document.getElementById("list_map");
         var pos = Geolocation.get_client_latlng();
+        var pageURL = $(location).attr("href");
 
         if(mapExists) {
 
@@ -50,27 +53,26 @@ var Map = {
                 L.mapbox.featureLayer({
                     // this feature is in the GeoJSON format: see geojson.org
                     // for the full specification
-                    type: 'Feature',
+                    'type': 'Feature',
                     geometry: {
-                        type: 'Point',
+                        'type': 'Point',
                         // coordinates here are in longitude, latitude order because
                         // x, y is the standard for GeoJSON and many formats
-                        coordinates: [data.lng,data.lat]
+                        'coordinates': [data.lng,data.lat]
                     },
                     properties: {
-                        title: data.spot_name,
-                        description: data.building,
+                        'title': data.spot_name,
+                        'description': data.building + '<br><a href="'+ pageURL + data.id +'">View details</a>',
                         // one can customize markers by adding simplestyle properties
                         // https://www.mapbox.com/guides/an-open-platform/#simplestyle
                         'marker-size': 'small',
                         'marker-color': '#6462a5',
-                        'marker-symbol': 'cafe', // https://www.mapbox.com/maki/
+                        'marker-symbol': 'circle-stroked', // https://www.mapbox.com/maki/
+
                     }
                 }).addTo(map);
 
-
             });
-
 
         }
     },
@@ -97,24 +99,24 @@ var Map = {
             L.mapbox.featureLayer({
                 // this feature is in the GeoJSON format: see geojson.org
                 // for the full specification
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
                     // coordinates here are in longitude, latitude order because
                     // x, y is the standard for GeoJSON and many formats
-                    coordinates: [spot_lng,spot_lat]
+                    'coordinates': [spot_lng,spot_lat]
                 },
                 properties: {
-                    title: spot_name,
-                    description: spot_building,
+                    'title': spot_name,
+                    'description': spot_building + '<br/><a href="https://maps.google.com/maps?q=' + spot_lat + ',' + spot_lng + '" target="_blank">Get directions</a>',
+
                     // one can customize markers by adding simplestyle properties
                     // https://www.mapbox.com/guides/an-open-platform/#simplestyle
                     'marker-size': 'medium',
                     'marker-color': '#6462a5',
-                    'marker-symbol': 'cafe', // https://www.mapbox.com/maki/
+                    'marker-symbol': 'circle-stroked', // https://www.mapbox.com/maki/
                 }
             }).addTo(map);
-
 
         }
 

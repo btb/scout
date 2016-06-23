@@ -105,3 +105,12 @@ body { overflow: hidden; }
 .scout-spot-list-map {
     .gmnoprint { cursor: pointer !important; }
 }
+
+// font awesome + mapbox markers
+
+.fa-icon {
+    margin-top: -25px !important;
+    margin-left: -3px !important;
+    font-size: 9px !important;
+    color: #fff !important;
+}

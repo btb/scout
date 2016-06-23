@@ -5,6 +5,7 @@ $(document).on('ready', function(event) {
 
     // page based JS calls
     var page_path = window.location.pathname;
+
     if (page_path.indexOf("food") !== -1) {
         // food
         List.init();
@@ -20,9 +21,9 @@ $(document).on('ready', function(event) {
     }
     else if (page_path.indexOf("map") !== -1){
         // mobile map
-        Map.init_map_page();
-        List.init();
-        Map.init_map();
+        //Map.init_map_page();
+        //List.init();
+        //Map.init_map();
     }
     else {
         Discover.init_cards();
