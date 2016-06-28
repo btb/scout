@@ -107,10 +107,16 @@ body { overflow: hidden; }
 }
 
 // font awesome + mapbox markers
-
 .fa-icon {
     margin-top: -25px !important;
     margin-left: -3px !important;
     font-size: 9px !important;
     color: #fff !important;
+}
+
+// gmap tooltip styles
+.gm-style-iw { line-height: 17px !important;
+    a { color: #427fed; text-decoration: none;
+        &:hover { text-decoration: underline; }
+    }
 }
