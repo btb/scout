@@ -25,7 +25,7 @@ $(document).on('ready', function(event) {
             arrows: false,
         });
 
-    } else if (page_path.indexOf("tech") !== -1){
+    } else if (page_path.indexOf("tech") !== -1) {
         Geolocation.display_location_status();
         List.init();
         Map.init_map();
@@ -34,6 +34,14 @@ $(document).on('ready', function(event) {
     } else {
         Discover.init_cards();
         Map.init_map();
+    }
+
+    // freeze body for mobile maps
+    if (page_path.indexOf("map") !== -1) {
+        $("body").addClass("freeze");
+        Layout.init_mobile_map();
+    } else {
+        $("body").removeClass("freeze");
     }
 
     Filter.replace_navigation_href();
@@ -46,7 +54,5 @@ $(document).on('ready', function(event) {
 });
 
 $(window).scroll(function(){
-
     var isMobile = $("body").data("mobile");
-
 });

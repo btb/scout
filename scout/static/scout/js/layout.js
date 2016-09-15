@@ -43,4 +43,9 @@ var Layout = {
         }
 
     },
+
+    init_mobile_map: function(){
+        var offsetHeight = ($(".scout-header").outerHeight() + $(".scout-geolocation").outerHeight() + 18);
+        $(".scout-mobile-map-container").css({height: $(window).outerHeight() - offsetHeight });
+    },
 };

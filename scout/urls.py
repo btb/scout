@@ -76,6 +76,8 @@ urlpatterns = patterns(
         name='food_detail_view'),
     url(r'^(?P<campus>[^/]+)/food/filter/$',
         'scout.views.food_filter_view', name='food_filter_view'),
+    url(r'^(?P<campus>[^/]+)/food/map/$',
+        'scout.views.food_map_view', name='food_map_view'),
 
     # study
     url(r'^(?P<campus>[^/]+)/study/$',

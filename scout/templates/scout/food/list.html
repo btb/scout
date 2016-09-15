@@ -10,6 +10,11 @@
 
     {% if request.is_mobile or request.is_tablet %}{% include "scout/include/user_geolocation.html" %}{% endif %}
 
+    <!-- map or list chooser -->
+    <div style="background:#999;">
+        <a href="/{{ campus }}/food/">list</a> | <a id="link_food_map" href="/{{ campus }}/food/map/">map</a>
+    </div>
+
     <!-- food filter results -->
     <div class="scout-filter-results" aria-labelledby="filter_header">
         <div class="scout-filter-results-by">
