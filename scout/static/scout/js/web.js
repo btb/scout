@@ -35,15 +35,6 @@ $(document).on('ready', function(event) {
         Map.init_map();
     }
 
-    // freeze body for mobile maps
-    if (page_path.indexOf("map") !== -1) {
-        $("body").addClass("freeze");
-        Layout.init_mobile_map();
-    } else {
-        $("body").removeClass("freeze");
-    }
-
-
     Filter.replace_navigation_href();
     // call this last so all page level location event listeners have been declared
     Geolocation.update_location();

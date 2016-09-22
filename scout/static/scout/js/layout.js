@@ -42,10 +42,33 @@ var Layout = {
             $(".scout-spot-gallery").css('max-height', aspectHeight);
         }
 
+        $("#blah").click(function(e) {
+            e.preventDefault();
+            Layout.display_mobile_map();
+        });
+
+        $("#foo").click(function(e) {
+            e.preventDefault();
+            Layout.hide_mobile_map();
+        });
+
     },
 
-    init_mobile_map: function(){
+    display_mobile_map: function(){
         var offsetHeight = ($(".scout-header").outerHeight() + $(".scout-geolocation").outerHeight() + 18);
         $(".scout-mobile-map-container").css({height: $(window).outerHeight() - offsetHeight });
+
+        $("body").addClass("freeze");
+        $(".scout-mobile-map-container").show();
+        $(".scout-filter-results").hide();
+        $(".scout-list-container").hide();
     },
+
+    hide_mobile_map: function(){
+        $("body").removeClass("freeze");
+        $(".scout-mobile-map-container").hide();
+        $(".scout-filter-results").show();
+        $(".scout-list-container").show();
+    },
+
 };
