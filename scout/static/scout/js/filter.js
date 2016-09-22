@@ -60,6 +60,10 @@ var Filter = {
         var filter_text = Filter._get_filter_label_text();
         if(filter_text.length > 0){
             $("#filter_label_text").html(filter_text);
+            $("#filter_text_holder").removeClass("visually-hidden");
+            $("#reset_food_list").removeClass("visually-hidden");
+            $("#reset_study_list").removeClass("visually-hidden");
+            $("#reset_tech_list").removeClass("visually-hidden");
         }
     },
 
@@ -81,7 +85,7 @@ var Filter = {
     },
 
     redirect_to_page: function(type) {
-        var campus = window.location.pathname.split('/')[1];
+        var campus = Navigation.get_campus_selection();
         var filter_url = Filter.get_filter_url(type);
 
         if (filter_url !== undefined){

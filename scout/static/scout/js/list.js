@@ -93,18 +93,63 @@ var List = {
         var spot_data = [];
         var spots = $(".scout-list-item").not(".scout-error");
         $.each(spots, function (idx, spot) {
+            var url = $(spot).find("a").attr("href");
             var id = $(spot).attr("id");
             var lat = $(spot).attr("data-spot-lat");
             var lng = $(spot).attr("data-spot-lng");
             var spot_name = $(spot).attr("data-spot-name");
             var building = $(spot).attr("data-spot-building");
-            spot_data.push({"id": id,
+            var items = 0;
+            if ($(spot).attr("data-items")){
+                items = $(spot).attr("data-items");
+            }
+            spot_data.push({"url": url,
+                            "id": id,
                             "lat": lat,
                             "lng": lng,
                             "spot_name": spot_name,
-                            "building": building})
+                            "building": building,
+                            "items" : items})
         });
         return spot_data
+    },
+
+    filter_visible_spots: function(spot_ids){
+        var list_items = $("li.scout-list-item");
+        var list_count = 0;
+        $.each(list_items, function(idx, item){
+            var list_spot_id = $(item).attr('id');
+            if ($.inArray(list_spot_id, spot_ids) === -1){
+                // Spot not visible, hide it
+                $(item).hide();
+            } else {
+                //Spot visible, show it
+                $(item).show();
+                list_count += 1;
+            }
+        });
+        $("#scout_filter_results_count").html(list_count);
+        List._hide_show_building_headers();
+    },
+
+    _hide_show_building_headers: function(){
+        // Hides orphaned building headers/shows them when spots are unhidden
+        var buildings = $("li.scout-list-building");
+        $.each(buildings, function(idx, building) {
+            // Not using jquery visibility selector as it checks if ancestor is hidden
+            var building_spots = $(building).find("li.scout-list-item");
+            var visible_spots = [];
+            $.each(building_spots, function(idx, spot){
+                if($(spot).css('display') != "none"){
+                    visible_spots.push(spot);
+                }
+            });
+            if (visible_spots.length === 0) {
+                $(building).hide();
+            } else {
+                $(building).show();
+            }
+        });
     }
 
 };
