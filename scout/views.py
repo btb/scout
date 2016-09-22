@@ -147,17 +147,6 @@ def food_list_view(request, campus):
 
 
 @validate_campus_selection
-def food_map_view(request, campus):
-    spots = get_filtered_spots(request, campus, "food")
-    context = {"spots": spots,
-               "campus": campus,
-               "count": len(spots),
-               "app_type": 'food'}
-    return render_to_response('scout/food/map.html', context,
-                              context_instance=RequestContext(request))
-
-
-@validate_campus_selection
 def food_detail_view(request, campus, spot_id):
     spot = get_spot_by_id(spot_id)
     spot = validate_detail_info(spot, campus, "food")
