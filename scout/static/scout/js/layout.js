@@ -55,18 +55,23 @@ var Layout = {
     },
 
     display_mobile_map: function(){
-        var offsetHeight = ($(".scout-header").outerHeight() + $(".scout-geolocation").outerHeight() + 18);
-        $(".scout-mobile-map-container").css({height: $(window).outerHeight() - offsetHeight });
 
+        // calculate remaining height of viewport for map display
+        var offsetHeight = ($(".scout-header").outerHeight() + $(".scout-geolocation").outerHeight() + ($(".scout-mobile-map-chooser").outerHeight()) );
+        $(".scout-mobile-map-container").css({height: $(window).outerHeight() - offsetHeight });
+        $("#food_list_map").css({height: $(window).outerHeight() - offsetHeight });
+
+        // freeze body to prevent scrolling outside of map viewport
         $("body").addClass("freeze");
-        $(".scout-mobile-map-container").show();
         $(".scout-filter-results").hide();
         $(".scout-list-container").hide();
     },
 
     hide_mobile_map: function(){
+
+        // set height of mobile map container to 0 to hide
+        $(".scout-mobile-map-container").height(0);
         $("body").removeClass("freeze");
-        $(".scout-mobile-map-container").hide();
         $(".scout-filter-results").show();
         $(".scout-list-container").show();
     },

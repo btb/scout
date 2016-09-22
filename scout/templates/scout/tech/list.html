@@ -12,8 +12,10 @@
 
     {% if spots %}
 
+    {% if request.is_mobile %}
     <!-- map or list chooser -->
     {% include "scout/include/list_map_chooser.html" %}
+    {% endif %}
 
     <!-- tech filter results -->
     <div class="scout-filter-results" aria-labelledby="filter_header">

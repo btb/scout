@@ -10,9 +10,11 @@
 
     {% if request.is_mobile or request.is_tablet %}{% include "scout/include/user_geolocation.html" %}{% endif %}
 
+    {% if request.is_mobile %}
     <!-- map or list chooser -->
     {% include "scout/include/list_map_chooser.html" %}
-
+    {% endif %}
+    
     <!-- food filter results -->
     <div class="scout-filter-results" aria-labelledby="filter_header">
         <div class="scout-filter-results-by visually-hidden" id="filter_text_holder">
@@ -106,7 +108,7 @@
 
     {% if request.is_mobile %}
 
-    <div class="scout-mobile-map-container" style="position:relative;">
+    <div class="scout-mobile-map-container">
         <div style="display:inline-block; position:absolute; top: 15px; right:10px; z-index:9999; background:#fff;padding: 10px; font-size:11px;">
              <a href="/{{ campus }}/food/filter/">filter</a>
         </div>

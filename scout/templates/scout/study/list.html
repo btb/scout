@@ -10,8 +10,10 @@
 
     {% if request.is_mobile or request.is_tablet %}{% include "scout/include/user_geolocation.html" %}{% endif %}
 
+    {% if request.is_mobile %}
     <!-- map or list chooser -->
     {% include "scout/include/list_map_chooser.html" %}
+    {% endif %}
 
     <!-- food filter results -->
     <div class="scout-filter-results" aria-labelledby="filter_header">

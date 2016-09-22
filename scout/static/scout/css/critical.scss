@@ -441,6 +441,10 @@ a {color: $scout-link;}
 
         }
 
+        /*** mobile only map ***/
+        .scout-mobile-map-chooser { background:#999;text-align:center; line-height: 30px; }
+        .scout-mobile-map-container { position: relative; height: 0; overflow: hidden; }
+
     }
 
 }
