@@ -14,7 +14,7 @@
     <!-- map or list chooser -->
     {% include "scout/include/list_map_chooser.html" %}
     {% endif %}
-    
+
     <!-- food filter results -->
     <div class="scout-filter-results" aria-labelledby="filter_header">
         <div class="scout-filter-results-by visually-hidden" id="filter_text_holder">
@@ -101,7 +101,6 @@
                     </div>
                 </li>
             {% endfor %}
-
         </ol>
 
     </div>
@@ -135,6 +134,10 @@
         </div>
     </div>
     {% endif %}
+
+    <div style="padding:20px; font-size:13px;">Have a space to add? <a title="Suggest a space via email" href="mailto:help@uw.edu?subject=Scout:%20{{ app_type|title }}%20space%20suggestion">Suggest it</a></div>
+
+    </div>
 
 </div>
 
