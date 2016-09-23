@@ -65,7 +65,6 @@ var Map = {
 
             var map = new google.maps.Map(currentMap, mapOptions);
 
-            Map.add_current_position_marker(map, pos);
             map.setOptions({styles: styles});
 
             // multiple pins on a single map
@@ -175,6 +174,7 @@ var Map = {
 
             window.map_bounds = bounds;
             window.map_object = map;
+            Map.add_current_position_marker(map, pos);
 
             // marker clusterer options
             var mc_options = {
