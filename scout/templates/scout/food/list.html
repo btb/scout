@@ -103,17 +103,19 @@
             {% endfor %}
         </ol>
 
+        <div style="padding:20px; font-size:13px;">Have a space to add? <a title="Suggest a space via email" href="mailto:help@uw.edu?subject=Scout:%20{{ app_type|title }}%20space%20suggestion">Suggest it</a></div>
+
     </div>
 
     {% if request.is_mobile %}
 
-    <div class="scout-mobile-map-container">
+    <div class="scout-mobile-map-container" style="height:600px; display:none; ">
         <div style="display:inline-block; position:absolute; top: 15px; right:10px; z-index:9999; background:#fff;padding: 10px; font-size:11px;">
              <a href="/{{ campus }}/food/filter/">filter</a>
         </div>
 
         <!-- show a map on the list page -->
-        <div id="food_list_map" style="height:400px; background:#ccc;">
+        <div id="food_list_map" style="height:100%; background: #ddd !important;">
             <div class="scout-spot-list-map-loading" style="position:absolute; top: 50%; left: 50%; margin-left:-15px; margin-top: -110px; z-index:9999;">
                 <p class="visually-hidden">loading...</p>
                 <div class="sk-fading-circle" aria-hidden="true">
@@ -134,10 +136,6 @@
         </div>
     </div>
     {% endif %}
-
-    <div style="padding:20px; font-size:13px;">Have a space to add? <a title="Suggest a space via email" href="mailto:help@uw.edu?subject=Scout:%20{{ app_type|title }}%20space%20suggestion">Suggest it</a></div>
-
-    </div>
 
 </div>
 

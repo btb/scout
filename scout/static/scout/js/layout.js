@@ -59,7 +59,7 @@ var Layout = {
         // calculate remaining height of viewport for map display
         var offsetHeight = ($(".scout-header").outerHeight() + $(".scout-geolocation").outerHeight() + ($(".scout-mobile-map-chooser").outerHeight()) );
         $(".scout-mobile-map-container").css({height: $(window).outerHeight() - offsetHeight });
-        $("#food_list_map").css({height: $(window).outerHeight() - offsetHeight });
+        //$("#food_list_map").css({height: $(window).outerHeight() - offsetHeight });
 
         // freeze body to prevent scrolling outside of map viewport
         $("body").addClass("freeze");
