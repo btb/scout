@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from scout import views
 
+app_name = 'scout'
 
 urlpatterns = patterns(
     '',
