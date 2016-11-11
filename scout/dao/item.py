@@ -71,6 +71,7 @@ def add_item_info(spot):
 
 
 def get_filtered_items(spots, request):
+    app_name = request.resolver_match.app_name
     parameter_list = _get_spot_filters(request)
     brand = []
     subcategory = []
@@ -80,22 +81,21 @@ def get_filtered_items(spots, request):
         elif param[0] == "item:subcategory":
             subcategory.append(param[1])
 
-    if len(brand) <= 0 and len(subcategory) <= 0:
-        return spots
-
-    newSpots = []
+    new_spots = []
 
     for spot in spots:
-        newSpot = copy.deepcopy(spot)
-        newSpot.items = []
+        new_spot = copy.deepcopy(spot)
+        new_spot.items = []
         for item in spot.items:
-            if item.subcategory in subcategory:
-                newSpot.items.append(item)
-            else:
-                if item.brand in brand:
-                    newSpot.items.append(item)
-        newSpots.append(newSpot)
-    return newSpots
+            if app_name == 'scout' and not item.is_active:
+                continue
+            if len(subcategory) > 0 and item.subcategory not in subcategory:
+                continue
+            if len(brand) > 0 and item.brand not in brand:
+                continue
+            new_spot.items.append(item)
+        new_spots.append(new_spot)
+    return new_spots
 
 
 def get_item_count(spots):
