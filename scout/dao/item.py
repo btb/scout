@@ -1,3 +1,5 @@
+from django.core.urlresolvers import resolve
+
 from scout.dao.space import get_spots_by_filter, _get_spot_filters, \
     _get_extended_info_by_key
 import copy
@@ -71,7 +73,7 @@ def add_item_info(spot):
 
 
 def get_filtered_items(spots, request):
-    app_name = request.resolver_match.app_name
+    app_name = resolve(request.path).app_name
     parameter_list = _get_spot_filters(request)
     brand = []
     subcategory = []
